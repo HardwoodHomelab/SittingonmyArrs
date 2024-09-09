@@ -17,6 +17,7 @@ services:
       - 7878:7878 # Radarr
       - 8989:8989 # Sonarr
       - 9696:9696 # Prowlarr
+      - 8191:8191 # Flaresolver
     volumes:
       - /home/ubuntu/docker/arr-stack:/gluetun
     environment:
@@ -94,6 +95,19 @@ services:
     volumes:
       - ./prowlarr/data:/config
     restart: unless-stopped
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - TZ=America/Edmonton 
+    network_mode: service:gluetun
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges:true
+    restart: always
 
   plex:
     image: lscr.io/linuxserver/plex:latest
