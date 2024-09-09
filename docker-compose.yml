@@ -12,7 +12,7 @@ services:
     ports:
       - 6881:6881
       - 6881:6881/udp
-      - 8085:8085 # qbittorrent
+      - 8080:8080 # qbittorrent
       - 5055:5055 # Overseerr
       - 7878:7878 # Radarr
       - 8989:8989 # Sonarr
@@ -35,7 +35,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Edmonton
-      - WEBUI_PORT=8085
+      - WEBUI_PORT=8080
     volumes:
       - ./qbittorrent:/config
       - ./downloads:/downloads
